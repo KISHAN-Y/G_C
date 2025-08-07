@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Computing: Myths, Realities & The Future</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F0F4F8;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .stat-card h3 {
+            line-height: 1.2;
+        }
+        .flowchart-step {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .flowchart-step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .arrow {
+            color: #4A5568;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-teal-600">Green Computing Tutor</h1>
+            <div class="hidden md:flex space-x-8">
+                <a href="#footprint" class="text-gray-600 hover:text-teal-500">Footprint</a>
+                <a href="#myths" class="text-gray-600 hover:text-teal-500">Myths</a>
+                <a href="#circular" class="text-gray-600 hover:text-teal-500">Circular Economy</a>
+                <a href="#innovations" class="text-gray-600 hover:text-teal-500">Innovations</a>
+                <a href="#future" class="text-gray-600 hover:text-teal-500">Future</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8">
+
+        <section class="text-center my-12 md:my-20">
+            <h1 class="text-4xl md:text-6xl font-black text-gray-800 mb-4">Green Computing: From Myth to Reality</h1>
+            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">An expert analysis of sustainable IT, debunking common misconceptions and exploring the innovations that will define a greener digital future.</p>
+        </section>
+
+        <section id="footprint" class="my-16 scroll-mt-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800">Our Global Digital Footprint</h2>
+                <p class="text-gray-600 mt-2">The infrastructure powering our digital world has a vast and growing environmental cost.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+                <div class="bg-white p-6 rounded-lg shadow-lg stat-card">
+                    <div class="text-5xl font-extrabold text-teal-500">12%</div>
+                    <h3 class="mt-2 font-semibold text-gray-700">of Global Electricity Use</h3>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg stat-card">
+                    <div class="text-5xl font-extrabold text-teal-500">3.2%</div>
+                    <h3 class="mt-2 font-semibold text-gray-700">of Global GHG Emissions</h3>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg stat-card">
+                    <div class="text-5xl font-extrabold text-teal-500">62B kg</div>
+                    <h3 class="mt-2 font-semibold text-gray-700">of E-Waste Generated Annually</h3>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg stat-card">
+                    <div class="text-5xl font-extrabold text-red-500">22.3%</div>
+                    <h3 class="mt-2 font-semibold text-gray-700">Formal E-Waste Recycling Rate</h3>
+                </div>
+            </div>
+        </section>
+
+        <section id="myths" class="my-20 scroll-mt-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800">Debunking Green Computing Myths</h2>
+                <p class="text-gray-600 mt-2">Separating fact from fiction is the first step toward effective sustainable practices.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-8">
+
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-bold mb-4">Myth #1: Leaving a PC on saves energy.</h3>
+                    <p class="text-gray-600 mb-4">This is a holdover from the CRT monitor era. Modern PCs consume significant power when idle. Let's look at the data.</p>
+                    <div class="chart-container h-80 md:h-96">
+                        <canvas id="pcPowerChart"></canvas>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-4 text-center">The most effective action is to shut down or hibernate your computer for long breaks.</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-bold mb-4">Myth #3: Newer hardware is always greener.</h3>
+                    <p class="text-gray-600 mb-4">Operational efficiency is only part of the story. The environmental cost of manufacturing is immense. The "embodied carbon" of a device often dwarfs its lifetime energy use.</p>
+                    <div class="chart-container h-80 md:h-96">
+                        <canvas id="lifecycleChart"></canvas>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-4 text-center">Extending the life of your current device is often the most sustainable choice.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="circular" class="my-20 scroll-mt-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800">The Circular Economy for Hardware</h2>
+                <p class="text-gray-600 mt-2">Moving from a "take-make-dispose" model to a sustainable, closed-loop system.</p>
+            </div>
+            <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4">
+                <div class="flowchart-step bg-teal-100 text-teal-800 p-6 rounded-lg w-full md:w-56 text-center">
+                    <div class="text-3xl font-bold">①</div>
+                    <h4 class="font-bold mt-2">Reduce & Design</h4>
+                    <p class="text-sm">Create durable, repairable, and modular products from the start.</p>
+                </div>
+                <div class="arrow text-4xl transform rotate-90 md:rotate-0">→</div>
+                <div class="flowchart-step bg-cyan-100 text-cyan-800 p-6 rounded-lg w-full md:w-56 text-center">
+                    <div class="text-3xl font-bold">②</div>
+                    <h4 class="font-bold mt-2">Reuse & Repair</h4>
+                    <p class="text-sm">Extend a product's life through second-hand markets and easy repairs.</p>
+                </div>
+                <div class="arrow text-4xl transform rotate-90 md:rotate-0">→</div>
+                <div class="flowchart-step bg-sky-100 text-sky-800 p-6 rounded-lg w-full md:w-56 text-center">
+                    <div class="text-3xl font-bold">③</div>
+                    <h4 class="font-bold mt-2">Refurbish</h4>
+                    <p class="text-sm">Restore used products to functional condition for resale.</p>
+                </div>
+                <div class="arrow text-4xl transform rotate-90 md:rotate-0">→</div>
+                <div class="flowchart-step bg-indigo-100 text-indigo-800 p-6 rounded-lg w-full md:w-56 text-center">
+                    <div class="text-3xl font-bold">④</div>
+                    <h4 class="font-bold mt-2">Recycle</h4>
+                    <p class="text-sm">Recover valuable materials from end-of-life products.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="innovations" class="my-20 scroll-mt-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800">Pioneering the Future</h2>
+                <p class="text-gray-600 mt-2">Industry leaders are pushing the boundaries of sustainable innovation.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-bold mb-2">Google's Geothermal Gambit</h3>
+                    <p class="text-gray-600 mb-4">To achieve 24/7 carbon-free energy, Google is investing in next-generation geothermal power. This "always-on" clean energy source complements intermittent renewables like solar and wind, providing a stable, carbon-free baseload for their data centers.</p>
+                    <div class="flex items-center mt-4">
+                        <span class="text-3xl mr-4">🌍</span>
+                        <p class="font-semibold">Key Innovation: Enhanced Geothermal Systems (EGS) for reliable, 24/7 clean power.</p>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-bold mb-2">Microsoft's Project Natick</h3>
+                    <p class="text-gray-600 mb-4">By deploying a data center on the seafloor, Microsoft discovered that the sealed, nitrogen-filled, and consistently cool environment made servers 8x more reliable. While not commercially scaled, the lessons are influencing future terrestrial data center designs.</p>
+                     <div class="flex items-center mt-4">
+                        <span class="text-3xl mr-4">🌊</span>
+                        <p class="font-semibold">Key Finding: A stable, sealed environment dramatically boosts hardware reliability and lifespan.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="future" class="my-20 scroll-mt-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800">The Horizon of Green IT</h2>
+                <p class="text-gray-600 mt-2">Emerging trends and practical steps for a sustainable digital transformation.</p>
+            </div>
+            <div class="bg-white p-8 rounded-lg shadow-lg">
+                <ul class="space-y-6">
+                    <li class="flex items-start">
+                        <span class="text-2xl mr-4 mt-1">🤖</span>
+                        <div>
+                            <h4 class="font-bold">AI: The Double-Edged Sword</h4>
+                            <p class="text-gray-600">AI models demand immense energy, but can also optimize energy grids and climate solutions.</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-2xl mr-4 mt-1">💻</span>
+                        <div>
+                            <h4 class="font-bold">Green Software Engineering</h4>
+                            <p class="text-gray-600">Writing efficient code that minimizes the energy and hardware resources required to run applications.</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-2xl mr-4 mt-1">🏢</span>
+                        <div>
+                            <h4 class="font-bold">Sustainable Data Center Architecture</h4>
+                            <p class="text-gray-600">Innovations like modular design, free cooling, and capturing waste heat for reuse are becoming standard.</p>
+                        </div>
+                    </li>
+                     <li class="flex items-start">
+                        <span class="text-2xl mr-4 mt-1">♻️</span>
+                        <div>
+                            <h4 class="font-bold">Strategic Procurement</h4>
+                            <p class="text-gray-600">Prioritize vendors with high EPEAT ratings and transparent lifecycle data. Make product longevity a key purchasing criterion.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-800 text-white text-center p-6 mt-16">
+        <p>&copy; 2024 Green Computing Tutor. All rights reserved.</p>
+        <p class="text-sm text-gray-400 mt-2">An interactive infographic designed to educate and inspire sustainable action in IT.</p>
+    </footer>
+
+    <script>
+        const vibrantPalette = {
+            teal: 'rgba(13, 148, 136, 1)',
+            cyan: 'rgba(6, 182, 212, 1)',
+            sky: 'rgba(56, 189, 248, 1)',
+            indigo: 'rgba(99, 102, 241, 1)',
+            red: 'rgba(239, 68, 68, 1)',
+            gray: 'rgba(107, 114, 128, 0.5)'
+        };
+
+        function wrapLabel(str, maxWidth) {
+            if (str.length <= maxWidth) {
+                return str;
+            }
+            const words = str.split(' ');
+            const lines = [];
+            let currentLine = '';
+            for (const word of words) {
+                if ((currentLine + word).length > maxWidth) {
+                    lines.push(currentLine.trim());
+                    currentLine = '';
+                }
+                currentLine += word + ' ';
+            }
+            lines.push(currentLine.trim());
+            return lines;
+        }
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+        
+        const defaultChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        font: {
+                            size: 12
+                        }
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        title: tooltipTitleCallback
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        font: {
+                           size: 10
+                        }
+                    }
+                },
+                x: {
+                   ticks: {
+                       font: {
+                           size: 10
+                       }
+                   }
+                }
+            }
+        };
+
+        const pcPowerData = {
+            labels: ['Idle (On)', 'Screensaver', 'Sleep Mode', 'Hibernate', 'Shut Down'],
+            datasets: [{
+                label: 'Power Consumption (Watts)',
+                data: [125, 100, 3, 1.5, 1.2],
+                backgroundColor: [
+                    vibrantPalette.red,
+                    vibrantPalette.indigo,
+                    vibrantPalette.teal,
+                    vibrantPalette.cyan,
+                    vibrantPalette.sky
+                ],
+                borderColor: '#ffffff',
+                borderWidth: 2
+            }]
+        };
+
+        const pcPowerChartCtx = document.getElementById('pcPowerChart').getContext('2d');
+        new Chart(pcPowerChartCtx, {
+            type: 'bar',
+            data: pcPowerData,
+            options: {
+                ...defaultChartOptions,
+                plugins: {
+                    ...defaultChartOptions.plugins,
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Watts'
+                        }
+                    }
+                }
+            }
+        });
+
+        const lifecycleData = {
+            labels: ['Manufacturing & Materials', 'Product Use (5 years)', 'Transportation & Disposal'],
+            datasets: [{
+                label: 'Share of Lifetime Environmental Impact',
+                data: [70, 25, 5],
+                backgroundColor: [
+                    vibrantPalette.red,
+                    vibrantPalette.teal,
+                    vibrantPalette.gray
+                ],
+                hoverOffset: 4
+            }]
+        };
+
+        const lifecycleChartCtx = document.getElementById('lifecycleChart').getContext('2d');
+        new Chart(lifecycleChartCtx, {
+            type: 'doughnut',
+            data: lifecycleData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                    },
+                    tooltip: {
+                        callbacks: {
+                           title: tooltipTitleCallback
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Illustrative Lifecycle Impact of a PC'
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
